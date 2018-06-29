@@ -3,9 +3,7 @@ body {
     color: white;
     margin: 0;
 }
-.container-fluid {           
-    background-color: #E0FFFF;
-}
+
 a {
     text-decoration: none;
     color: #ffffff;
@@ -70,6 +68,6 @@ a:hover {
     opacity: 0.2;
 }*/
 .login-window {
-    width: 350px;
-    height: 218px;
+
+    height: 280px;
 }
