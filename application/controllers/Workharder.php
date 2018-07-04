@@ -11,7 +11,25 @@ class Workharder extends CI_Controller {
                 $this->load->model('workharder_m');
         }
     public function index() {
-        $this->load->view('workharder_index');
+        $table = $this->input->post();
+        if(isset($table['loginUsername'])) { //działa tylko na username a nie email
+            $sanitiziedUsername = $this->security->sanitize_filename($table['loginUsername']);
+            $query = $this->workharder_m->LoadFromDB('username',$sanitiziedUsername);
+            
+            if($this->db->affected_rows($query)>0) {
+                $row = $query->row_array();
+                $hash= hash('sha256',$table['loginPassword']);
+                $salt1 = 'jxAk1uUZRR5fa4q9aogd351B2aLH7Xk6kbp0c6dKz243qUenOkAU';
+                $salt2 = 'mjd02oh0RIi83eph16d1ekSxiusj8Al6Llc7dng4a1jmofn74hba';
+                $password = $salt1 . $hash . $salt2;
+                
+                if($row['password']==$password) {
+                    $access = true;
+                    $data['access'] = $access;
+                } else {$access=false; $data['access'] = $access;}
+            } 
+        }
+        @$this->load->view('workharder_index',$data);
     }
     public function register() {
         $table = $this->input->post();

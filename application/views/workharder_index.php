@@ -1,3 +1,11 @@
+<?php 
+if($access==true) {header('Location:'. site_url(). 'workharder/fffffffffff');} elseif($access=false) {
+    echo "niezalogowany"; 
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +53,7 @@
        
         <div class="bordersquare x row" style="width:700px;">
         <div class="login-window col-5" style="border-right-style: dotted;  padding-right:35px; float:left;">
-        <form action="http://[::1]/codeigniter/workharder/register" method="post" accept-charset="utf-8" style="width:100%;">
+        <form action="http://[::1]/codeigniter/workharder/index" method="post" accept-charset="utf-8" style="width:100%;">
         <div class="full-width d-flex justify-content-center align-items-center" style="width:100%; margin-bottom:10px;"><a href="<?php echo site_url(); ?>workharder/"><img src="https://www.smartads.in/resources/assets/images/logo/smartadslogo.png" alt=""></a></div>
         <div class="form-group">
 
@@ -56,10 +64,10 @@
                <input type="password" class="form-control" name="loginPassword" placeholder="Hasło" required> </div>
                
             <div class="form-row"><div class="form-group col-md-12 d-flex align-items-center justify-content-end"><button  type="submit" class="btn btn-primary btn-lg" style="width:100%;">Zaloguj się</button></div></div><div class="form-row"><div class="form-group col-md-12" style="margin-bottom:0; text-align:center;"><a href="#pomocprzyhasle" style="font-size:12px; border-right-style: solid; padding-right:10px; border-right-width:thin;">Zapomniałem hasła</a><a href="#pomocprzyemailu" style="font-size:12px; padding-left:10px;">e-maila</a></div></div>
-        </form></div>
+        </form> <!--   Okno logowania KONIEC    --> </div>
         <div class="register-prop col-7 container-fluid"><div class="row"><div class="col-12" style="text-align:center;"><h2>Nie masz jeszcze konta?</h2></div></div><div class="row"><div class="col-12" style="text-align:center;"><h5>Dołącz już dzisiaj do naszej społeczności aby pokonać prokrastynację!</h5></div></div><div class="row" ><div class="d-flex align-items-center justify-content-center" style="width:100%; padding-top:20px;"><button type="button" class="btn btn-primary btn-lg">Zarejestruj się!</button></div></div></div><div style="clear:both;"></div>
         
-        </div> <!--   Okno logowania KONIEC    --> </div>
+        </div></div>
     </div>
    
    <div class="row navbar">
