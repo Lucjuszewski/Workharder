@@ -14,7 +14,7 @@ class Workharder extends CI_Controller {
         $table = $this->input->post();
         if(isset($table['loginUsername'])) { //działa tylko na username a nie email
             $sanitiziedUsername = $this->security->sanitize_filename($table['loginUsername']);
-            $query = $this->workharder_m->LoadFromDB('username',$sanitiziedUsername);
+            $query = $this->workharder_m->LoadFromDB('email',$sanitiziedUsername);
             
             if($this->db->affected_rows($query)>0) {
                 $row = $query->row_array();
@@ -28,7 +28,12 @@ class Workharder extends CI_Controller {
                     $data['access'] = $access;
                 } else {$access=false; $data['access'] = $access;}
             } 
-        }
+            $query2 = $this->workharder_m->LoadFromDB('username',$sanitiziedUsername);
+            if($this->db->affected_rows($query2)>0) {
+                $access = true;
+                    $data['access'] = $access;
+            }
+        } //Koniec logowania
         @$this->load->view('workharder_index',$data);
     }
     public function register() {
