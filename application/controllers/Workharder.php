@@ -12,7 +12,7 @@ class Workharder extends CI_Controller {
         }
     public function index() {
         $table = $this->input->post();
-        if(isset($table['loginUsername'])) { //działa tylko na username a nie email
+        if(isset($table['loginUsername'])) { 
             $sanitiziedUsername = $this->security->sanitize_filename($table['loginUsername']);
             $query = $this->workharder_m->LoadFromDB('email',$sanitiziedUsername);
             
@@ -26,12 +26,21 @@ class Workharder extends CI_Controller {
                 if($row['password']==$password) {
                     $access = true;
                     $data['access'] = $access;
-                } else {$access=false; $data['access'] = $access;}
+                    $lgEmail = true;
+                } else {$access=false; $data['access'] = $access; $lgEmail = false;}
             } 
             $query2 = $this->workharder_m->LoadFromDB('username',$sanitiziedUsername);
-            if($this->db->affected_rows($query2)>0) {
-                $access = true;
+            if($this->db->affected_rows($query2)>0&&!$lgEmail) {
+                $row = $query2->row_array();
+                $hash= hash('sha256',$table['loginPassword']);
+                $salt1 = 'jxAk1uUZRR5fa4q9aogd351B2aLH7Xk6kbp0c6dKz243qUenOkAU';
+                $salt2 = 'mjd02oh0RIi83eph16d1ekSxiusj8Al6Llc7dng4a1jmofn74hba';
+                $password = $salt1 . $hash . $salt2;
+                
+                if($row['password']==$password) {
+                    $access = true;
                     $data['access'] = $access;
+                } else {$access=false; $data['access'] = $access;}
             }
         } //Koniec logowania
         @$this->load->view('workharder_index',$data);
@@ -49,6 +58,19 @@ class Workharder extends CI_Controller {
                     $data['p2_correct'] = $p2_correct;
                 } else {$p2_correct = false;
                         $data['p2_correct'] = $p2_correct;}
+            }
+            if($u_correct) {
+                $result = $this->workharder_m->isItInDB('username',$table['inputUsername']);
+                if(!$result) {
+                    $u_correct = false;
+                     $data['u_inDB'] = $u_inDB = true;
+                }
+            }if($e_correct) {
+                $result = $this->workharder_m->isItInDB('email',$table['inputEmail']);
+                if(!$result) {
+                    $e_correct = false;
+                     $data['e_inDB'] = $e_inDB = true;
+                }
             }
             $data['u_correct'] = $u_correct;
             $data['e_correct'] = $e_correct;

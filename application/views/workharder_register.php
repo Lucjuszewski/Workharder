@@ -5,7 +5,7 @@ if(isset($p2_correct)) {if($p2_correct==true) {$p2 = true;} elseif($p2_correct==
 if(isset($e_correct)) {if($e_correct==true) {$e = true;} elseif($e_correct==false) {$e = false;}}
 if(isset($recaptcha_correct)) {if($recaptcha_correct==true) {$rc = true;} elseif($recaptcha_correct==false) {$rc = false;}}
 if($isRegister) {
-    header('Location:'. site_url(). 'workharder/');
+    header('Location:'. site_url(). 'workharder/youAreWelcome');
 }
 ?>
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ if($isRegister) {
         });
     });
 </script>
-   <div class="container-fluid x" style="height:100%; width:100%;padding-right: 0px; padding-left: 0px;">
+   <div class="container-fluid x" style="height:100%; width:100%;padding-right: 0px; padding-left: 0px; position:relative;">
      <div class="dark-layer" style="background-color:#000000; 
     position:absolute; 
     height:100%; 
@@ -83,21 +83,25 @@ if($isRegister) {
               <div class="col-2"><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-login">Zaloguj się</button></div></div>
              
     </div> 
-       <div class="row" style="height:100%;width:100%; margin:0" ><div class="container-fluid x" style="height:100%;width:100%;"><div class="col-12" style="height:100%;width:100%;" ><div class="d-flex justify-content-center align-items-center" style="height:100%;"><div class="bordersquare">
+       <div class="row" style="height:84%;width:100%; margin:0" ><div class="container-fluid x" style="height:100%;width:100%;"><div class="col-12" style="height:100%;width:100%;" ><div class="d-flex justify-content-center align-items-center" style="height:100%;"><div class="bordersquare">
           <div class="field-form d-flex align-items-center justify-content-center">
           <form action="http://[::1]/codeigniter/workharder/register" method="post" accept-charset="utf-8" style="width:100%;">
                <div class="form-group">
                    
                    <input type="text" class="form-control <?php if($u==true) {echo "is-valid";} elseif(isset($u)) {echo "is-invalid";}?>" name="inputUsername" placeholder="Nazwa użytkownika" required>
                    <?php 
-                   if($u==false)  {echo '<div class="invalid-feedback">Nazwa użytkownika może zawierać od x do x znaków A-Z i cyfr 0-9</div>';}
+                   if($u==false&&!isset($u_inDB))  {echo '<div class="invalid-feedback">Nazwa użytkownika może zawierać od x do x znaków A-Z i cyfr 0-9</div>';} elseif($u==false&&isset($u_inDB)) {
+                       echo '<div class="invalid-feedback">Konto z taką nazwą użytkownika już istnieje!</div>';
+                   }
                    ?>
                </div>
                <div class="form-group">
                    
                    <input type="text" class="form-control <?php if($e==true) {echo "is-valid";} elseif(isset($e)) {echo "is-invalid";}?>" name="inputEmail" placeholder="Adres email" required>
                    <?php 
-                   if($e==false) {echo '<div class="invalid-feedback">Błędnie wprowadzony email!</div>';}
+                   if($e==false&&!isset($e_inDB))  {echo '<div class="invalid-feedback">Błędnie wprowadzony email!</div>';} elseif($e==false&&isset($e_inDB)) {
+                       echo '<div class="invalid-feedback">Konto z takim emailem już istnieje!</div>';
+                   }
                    ?>
                </div>
                <div class="form-group">

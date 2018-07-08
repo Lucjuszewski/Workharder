@@ -13,19 +13,12 @@ Class Workharder_m extends CI_Model {
         
 		$this->load->database(); // przenieś te zasraną walidacje czy nie ma w bazie danych do kontrolera i chuj
         
-		$query = $this->db->query("SELECT * FROM workharder_db WHERE $where='$username'");
+		$query = $this->db->query("SELECT * FROM workharder_db WHERE $where='$username' ");
 		return $query;
 	}
     public function ValidateUsername($username) {
         if(preg_match('@^[A-Za-zóąśłżźćńÓĄŚŁŻŹĆŃ0-9_-]{6,20}$@',$username)) { 
-            $this->load->database();
-            $username_esc = $this->db->escape($username);
-            $query = $this->LoadFromDb('username',$username_esc);
-            if($query->num_rows()==0) {
-                return true;
-            } else {
-                return false;
-            }
+            return true;
         }else {
                 return false;
             }
@@ -33,14 +26,7 @@ Class Workharder_m extends CI_Model {
     } 
     public function ValidateEmail($email) {
         if(filter_var($email,FILTER_VALIDATE_EMAIL)) {
-            $this->load->database();
-            $email_esc = $this->db->escape($email);
-            $query = $this->LoadFromDb('email',$email_esc);
-            if($query->num_rows()==0) {
-                return true;
-            } else {
-                return false;
-            }
+            return true;
         } else {
             return false;
         }
@@ -58,6 +44,16 @@ Class Workharder_m extends CI_Model {
         } else {
             return false;
         }
+    }
+    public function isItInDB($what,$value) {
+        $this->load->database();
+            
+            $query = $this->LoadFromDb($what,$value);
+            if($query->num_rows()==0) {
+                return true;
+            } else {
+                return false;
+            }
     }
 }
 ?>
