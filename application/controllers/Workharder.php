@@ -102,4 +102,7 @@ class Workharder extends CI_Controller {
         } //End of work if form was sended
         @$this->load->view('workharder_register',$data);
     }
+    public function home(){
+        @$this->load->view('home');
+    }
 }

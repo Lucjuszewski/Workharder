@@ -1,5 +1,5 @@
 <?php 
-if($access==true) {header('Location:'. site_url(). 'workharder/fffffffffff');} elseif($access=false) {
+if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($access=false) {
     echo "niezalogowany"; 
 }
 ?>
