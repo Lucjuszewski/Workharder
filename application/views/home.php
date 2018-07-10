@@ -63,12 +63,22 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
             background: transparent;
             border: none;
             color: white;
+            padding-right: 0px;
 
         }
 
         .xD:focus {
             background: transparent;
             border: none;
+        }
+        .submit-x {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size:25px;
+        }
+        .submit-x:hover {
+            cursor: pointer;
         }
         .card-in {
             background-color:#3f3f3f; margin:10px;
@@ -157,7 +167,7 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                     <div class="row border-row"></div>
                                     <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="xD" style="font-size:20px;"></form>
+                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
                                         </div>
 
                                     </div>
@@ -193,9 +203,9 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row border-row"></div>
-                                    <div class="row fix-for-row" style="padding-top:10px;">
+                                     <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="xD" style="font-size:20px;"></form>
+                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
                                         </div>
 
                                     </div>
@@ -230,9 +240,9 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row border-row"></div>
-                                    <div class="row fix-for-row" style="padding-top:10px;">
+                                     <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="xD" style="font-size:20px;"></form>
+                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
                                         </div>
 
                                     </div>
@@ -267,9 +277,9 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row border-row"></div>
-                                    <div class="row fix-for-row" style="padding-top:10px;">
+                                     <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="xD" style="font-size:20px;"></form>
+                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
                                         </div>
 
                                     </div>
