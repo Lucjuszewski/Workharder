@@ -105,4 +105,9 @@ class Workharder extends CI_Controller {
     public function home(){
         @$this->load->view('home');
     }
+
+public function user_data_submit() {
+$textTosend = $this->input->post('textTosend');
+    echo 'Tescior'.$textTosend;
+}
 }

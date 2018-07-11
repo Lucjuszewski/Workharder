@@ -71,22 +71,27 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
             background: transparent;
             border: none;
         }
+
         .submit-x {
             background: transparent;
             border: none;
             color: white;
-            font-size:25px;
+            font-size: 25px;
         }
+
         .submit-x:hover {
             cursor: pointer;
         }
+
         .card-in {
-            background-color:#3f3f3f; margin:10px;
+            background-color: #3f3f3f;
+            margin: 10px;
         }
+
         .card-window {
-            padding-bottom:1px;
-            width: 100%; 
-            background-color:#3d3d3d; 
+            padding-bottom: 1px;
+            width: 100%;
+            background-color: #3d3d3d;
         }
 
     </style>
@@ -98,9 +103,30 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>scripts/js-corner.js"></script>
     <script>
+        var test = "cokolwiek";
         $(document).ready(function() {
             $(".card-window").corner("15px");
             $(".card-in").corner("3px");
+            //AJAX
+            $(".submit-x").click(function(event) {
+                var textTosend = $("#textTosend").val();
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('workharder/user_data_submit'); ?>" ,
+                    data: {
+                        textTosend: textTosend
+                    },
+                    success: function(result) {
+                        alert(result);
+                    },
+                    error: function (request, error) {
+        console.log(arguments);
+        alert(" Can't do because: " + error);
+    }
+
+                });
+            });
+
         });
 
     </script>
@@ -139,7 +165,7 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                             <div class="col-3">
                                 <!-- MIEJSCE PRÓB I TESTÓW OKIENKA     POCZĄTEK-->
 
-                                <div class="card-window" >
+                                <div class="card-window">
                                     <div class="row fix-for-row" style="border-radius: 3px; margin-bottom: 0px;">
                                         <div class="col-10">
                                             <p class="top-card-text" style="margin-bottom:0px;margin-bottom: 0px;">Codzienne nawyki</p>
@@ -152,13 +178,51 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
-                                    <div class="row fix-for-row card-in" >
+                                    <div class="row fix-for-row card-in">
                                         <div class="col-11">
                                             <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
-                                    <div class="row fix-for-row card-in" >
+                                    <div class="row fix-for-row card-in">
+                                        <div class="col-11 xyzyx">
+                                            <p class="text-infixed-row"><div id="kurwa"></div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
+                                        </div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="row border-row"></div>
+                                    <div class="row fix-for-row" style="padding-top:10px;">
+                                        <div class="col-12" style="padding-left: 10px;">
+                                            <form method="post"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!" name="textTosend" id="textTosend"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- MIEJSCE PRÓB I TESTÓW OKIENKA     KONIEC-->
+                            <div class="col-3">
+
+                                <div class="card-window ">
+                                    <div class="row fix-for-row" style="border-radius: 3px; margin-bottom: 0px;">
+                                        <div class="col-10">
+                                            <p class="top-card-text" style="margin-bottom:0px;margin-bottom: 0px;">Codzienne nawyki</p>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row fix-for-row card-in">
+                                        <div class="col-11">
+                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
+                                        </div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="row fix-for-row card-in">
+                                        <div class="col-11">
+                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
+                                        </div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="row fix-for-row card-in">
                                         <div class="col-11">
                                             <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
@@ -174,47 +238,9 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
 
                                 </div>
                             </div>
-                            <!-- MIEJSCE PRÓB I TESTÓW OKIENKA     KONIEC-->
                             <div class="col-3">
 
-                                <div class="card-window " >
-                                    <div class="row fix-for-row" style="border-radius: 3px; margin-bottom: 0px;">
-                                        <div class="col-10">
-                                            <p class="top-card-text" style="margin-bottom:0px;margin-bottom: 0px;">Codzienne nawyki</p>
-                                        </div>
-                                        <div class="col-2"></div>
-                                    </div>
-                                    <div class="row fix-for-row card-in" >
-                                        <div class="col-11">
-                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
-                                        </div>
-                                        <div class="col-1"></div>
-                                    </div>
-                                    <div class="row fix-for-row card-in">
-                                        <div class="col-11">
-                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
-                                        </div>
-                                        <div class="col-1"></div>
-                                    </div>
-                                    <div class="row fix-for-row card-in" >
-                                        <div class="col-11">
-                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
-                                        </div>
-                                        <div class="col-1"></div>
-                                    </div>
-                                    <div class="row border-row"></div>
-                                     <div class="row fix-for-row" style="padding-top:10px;">
-                                        <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-3">
-
-                                <div class="card-window" >
+                                <div class="card-window">
                                     <div class="row fix-for-row" style="border-radius: 3px; margin-bottom: 0px;">
                                         <div class="col-10">
                                             <p class="top-card-text" style="margin-bottom:0px;margin-bottom: 0px;">Codzienne nawyki</p>
@@ -227,20 +253,20 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
-                                    <div class="row fix-for-row card-in" >
+                                    <div class="row fix-for-row card-in">
                                         <div class="col-11">
                                             <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
-                                    <div class="row fix-for-row card-in" >
+                                    <div class="row fix-for-row card-in">
                                         <div class="col-11">
                                             <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row border-row"></div>
-                                     <div class="row fix-for-row" style="padding-top:10px;">
+                                    <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
                                             <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
                                         </div>
@@ -251,33 +277,33 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                             </div>
                             <div class="col-3">
 
-                                <div class="card-window" >
+                                <div class="card-window">
                                     <div class="row fix-for-row" style="border-radius: 3px; margin-bottom: 0px;">
                                         <div class="col-10">
                                             <p class="top-card-text" style="margin-bottom:0px;margin-bottom: 0px;">Codzienne nawyki</p>
                                         </div>
                                         <div class="col-2"></div>
                                     </div>
-                                    <div class="row fix-for-row card-in" >
+                                    <div class="row fix-for-row card-in">
                                         <div class="col-11">
                                             <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
-                                    <div class="row fix-for-row card-in" >
+                                    <div class="row fix-for-row card-in">
                                         <div class="col-11">
                                             <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
-                                    <div class="row fix-for-row card-in" >
+                                    <div class="row fix-for-row card-in">
                                         <div class="col-11">
                                             <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row border-row"></div>
-                                     <div class="row fix-for-row" style="padding-top:10px;">
+                                    <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
                                             <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
                                         </div>
