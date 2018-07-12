@@ -9,11 +9,11 @@ Class Workharder_m extends CI_Model {
 		}
 
 	}
-	public function LoadFromDB($where,$username) {
+	public function LoadFromDB($where,$username,$database="workharder_db") {
         
 		$this->load->database(); // przenieś te zasraną walidacje czy nie ma w bazie danych do kontrolera i chuj
         
-		$query = $this->db->query("SELECT * FROM workharder_db WHERE $where='$username' ");
+		$query = $this->db->query("SELECT * FROM $database WHERE $where='$username' ");
 		return $query;
 	}
     public function ValidateUsername($username) {
@@ -54,6 +54,19 @@ Class Workharder_m extends CI_Model {
             } else {
                 return false;
             }
+    }
+    public function SaveDB($what,$database = "records") {
+        $this->load->database();
+        $keys = array_keys($what);
+        $values = array_values($what);
+        $what_var = implode(",",$keys);
+        $where_var = implode("','",$values);
+        $result = $this->db->query("INSERT INTO $database($what_var) VALUES('$where_var')");
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 ?>

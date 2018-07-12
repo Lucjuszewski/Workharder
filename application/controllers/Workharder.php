@@ -27,10 +27,11 @@ class Workharder extends CI_Controller {
                     $access = true;
                     $data['access'] = $access;
                     $lgEmail = true;
+                    $data['usernameTologin'] = $row['username'];
                 } else {$access=false; $data['access'] = $access; $lgEmail = false;}
             } 
             $query2 = $this->workharder_m->LoadFromDB('username',$sanitiziedUsername);
-            if($this->db->affected_rows($query2)>0&&!$lgEmail) {
+            if($this->db->affected_rows($query2)>0&&!@$lgEmail) {
                 $row = $query2->row_array();
                 $hash= hash('sha256',$table['loginPassword']);
                 $salt1 = 'jxAk1uUZRR5fa4q9aogd351B2aLH7Xk6kbp0c6dKz243qUenOkAU';
@@ -40,6 +41,8 @@ class Workharder extends CI_Controller {
                 if($row['password']==$password) {
                     $access = true;
                     $data['access'] = $access;
+                    $data['usernameTologin'] = $row['username'];
+                    
                 } else {$access=false; $data['access'] = $access;}
             }
         } //Koniec logowania
@@ -100,6 +103,40 @@ class Workharder extends CI_Controller {
                 $data['isRegister'] = $isRegister;
             }
         } //End of work if form was sended
+         if(isset($table['loginUsername'])) { //Login start
+            $sanitiziedUsername = $this->security->sanitize_filename($table['loginUsername']);
+            $query = $this->workharder_m->LoadFromDB('email',$sanitiziedUsername);
+            
+            if($this->db->affected_rows($query)>0) {
+                $row = $query->row_array();
+                $hash= hash('sha256',$table['loginPassword']);
+                $salt1 = 'jxAk1uUZRR5fa4q9aogd351B2aLH7Xk6kbp0c6dKz243qUenOkAU';
+                $salt2 = 'mjd02oh0RIi83eph16d1ekSxiusj8Al6Llc7dng4a1jmofn74hba';
+                $password = $salt1 . $hash . $salt2;
+                
+                if($row['password']==$password) {
+                    $access = true;
+                    $data['access'] = $access;
+                    $lgEmail = true;
+                    $data['usernameTologin'] = $row['username'];
+                } else {$access=false; $data['access'] = $access; $lgEmail = false;}
+            } 
+            $query2 = $this->workharder_m->LoadFromDB('username',$sanitiziedUsername);
+            if($this->db->affected_rows($query2)>0&&!@$lgEmail) {
+                $row = $query2->row_array();
+                $hash= hash('sha256',$table['loginPassword']);
+                $salt1 = 'jxAk1uUZRR5fa4q9aogd351B2aLH7Xk6kbp0c6dKz243qUenOkAU';
+                $salt2 = 'mjd02oh0RIi83eph16d1ekSxiusj8Al6Llc7dng4a1jmofn74hba';
+                $password = $salt1 . $hash . $salt2;
+                
+                if($row['password']==$password) {
+                    $access = true;
+                    $data['access'] = $access;
+                    $data['usernameTologin'] = $row['username'];
+                    
+                } else {$access=false; $data['access'] = $access;}
+            }
+        } //Koniec logowania
         @$this->load->view('workharder_register',$data);
     }
     public function home(){
@@ -107,7 +144,18 @@ class Workharder extends CI_Controller {
     }
 
 public function user_data_submit() {
-$textTosend = $this->input->post('textTosend');
-    echo 'Tescior'.$textTosend;
+$table = $this->input->post();
+if(isset($table['textTosend'])) {   //jeśli ajax został użyty
+$textTosend = $table['textTosend'];
+$username = $table['username'];
+$now = time();
+$date = unix_to_human($now, TRUE, 'eu');
+$what = array('username' => $username,'todo' => $textTosend,'date' => $date);
+if($this->workharder_m->SaveDB($what)) {
+    echo 'Udalosie'.$textTosend.$username.$date; }
+    else {
+        echo 'Nie Udalosie'.$textTosend;
+    }
+}
 }
 }

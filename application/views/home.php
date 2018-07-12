@@ -1,11 +1,9 @@
 <?php 
-if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($access=false) {
-    echo "niezalogowany"; 
+session_start();
+if(!isset($_SESSION['isLoged'])) {
+header('Location:'. site_url(). 'workharder/');
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,22 +105,81 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
         $(document).ready(function() {
             $(".card-window").corner("15px");
             $(".card-in").corner("3px");
+            var username = "<?php echo $_SESSION['username'];?>";
             //AJAX
-            $(".submit-x").click(function(event) {
+            $(".submit-x1").click(function(event) {
                 var textTosend = $("#textTosend").val();
                 jQuery.ajax({
                     type: "POST",
-                    url: "<?php echo site_url('workharder/user_data_submit'); ?>" ,
+                    url: "<?php echo site_url('workharder/user_data_submit'); ?>",
                     data: {
-                        textTosend: textTosend
+                        textTosend: textTosend,
+                        username: username
                     },
                     success: function(result) {
                         alert(result);
                     },
-                    error: function (request, error) {
-        console.log(arguments);
-        alert(" Can't do because: " + error);
-    }
+                    error: function(request, error) {
+                        console.log(arguments);
+                        alert(" Can't do because: " + error);
+                    }
+
+                });
+            });
+            $(".submit-x2").click(function(event) {
+                var textTosend = $("#textTosend2").val();
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('workharder/user_data_submit'); ?>",
+                    data: {
+                        textTosend: textTosend,
+                        username: username
+                    },
+                    success: function(result) {
+                        alert(result);
+                    },
+                    error: function(request, error) {
+                        console.log(arguments);
+                        alert(" Can't do because: " + error);
+                    }
+
+                });
+            });
+            $(".submit-x3").click(function(event) {
+                var textTosend = $("#textTosend3").val();
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('workharder/user_data_submit'); ?>",
+                    data: {
+                        textTosend: textTosend,
+                        username: username
+                    },
+                    success: function(result) {
+                        alert(result);
+                    },
+                    error: function(request, error) {
+                        console.log(arguments);
+                        alert(" Can't do because: " + error);
+                    }
+
+                });
+            });
+            $(".submit-x4").click(function(event) {
+                var textTosend = $("#textTosend4").val();
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('workharder/user_data_submit'); ?>",
+                    data: {
+                        textTosend: textTosend,
+                        username:username
+                    },
+                    success: function(result) {
+                        alert(result);
+                    },
+                    error: function(request, error) {
+                        console.log(arguments);
+                        alert(" Can't do because: " + error);
+                    }
 
                 });
             });
@@ -130,6 +187,7 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
         });
 
     </script>
+
     <div class="container-fluid x" style="width:100%; height:100%;">
         <!--  Początek containera -->
         <div class="row navbar">
@@ -186,14 +244,16 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                     </div>
                                     <div class="row fix-for-row card-in">
                                         <div class="col-11 xyzyx">
-                                            <p class="text-infixed-row"><div id="kurwa"></div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
+                                            <p class="text-infixed-row">
+                                                <div id="kurwa"></div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
                                         </div>
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row border-row"></div>
                                     <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
-                                            <form method="post"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!" name="textTosend" id="textTosend"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
+                                            <form method="post"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!" name="textTosend" id="textTosend"> <input type="submit" value="+" class="submit-x col-1 submit-x1" style="font-size:20px;"></form>
                                         </div>
 
                                     </div>
@@ -231,7 +291,44 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                     <div class="row border-row"></div>
                                     <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
+                                            <form method="post"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!" name="textTosend2" id="textTosend2"> <input type="submit" value="+" class="submit-x col-1 submit-x2" style="font-size:20px;"></form>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-3">
+
+                                <div class="card-window ">
+                                    <div class="row fix-for-row" style="border-radius: 3px; margin-bottom: 0px;">
+                                        <div class="col-10">
+                                            <p class="top-card-text" style="margin-bottom:0px;margin-bottom: 0px;">Codzienne nawyki</p>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row fix-for-row card-in">
+                                        <div class="col-11">
+                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
+                                        </div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="row fix-for-row card-in">
+                                        <div class="col-11">
+                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
+                                        </div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="row fix-for-row card-in">
+                                        <div class="col-11">
+                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
+                                        </div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="row border-row"></div>
+                                    <div class="row fix-for-row" style="padding-top:10px;">
+                                        <div class="col-12" style="padding-left: 10px;">
+                                            <form method="post"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!" name="textTosend3" id="textTosend3"> <input type="submit" value="+" class="submit-x col-1 submit-x3" style="font-size:20px;"></form>
                                         </div>
 
                                     </div>
@@ -268,44 +365,7 @@ if($access==true) {header('Location:'. site_url(). 'workharder/home');} elseif($
                                     <div class="row border-row"></div>
                                     <div class="row fix-for-row" style="padding-top:10px;">
                                         <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-3">
-
-                                <div class="card-window">
-                                    <div class="row fix-for-row" style="border-radius: 3px; margin-bottom: 0px;">
-                                        <div class="col-10">
-                                            <p class="top-card-text" style="margin-bottom:0px;margin-bottom: 0px;">Codzienne nawyki</p>
-                                        </div>
-                                        <div class="col-2"></div>
-                                    </div>
-                                    <div class="row fix-for-row card-in">
-                                        <div class="col-11">
-                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
-                                        </div>
-                                        <div class="col-1"></div>
-                                    </div>
-                                    <div class="row fix-for-row card-in">
-                                        <div class="col-11">
-                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
-                                        </div>
-                                        <div class="col-1"></div>
-                                    </div>
-                                    <div class="row fix-for-row card-in">
-                                        <div class="col-11">
-                                            <p class="text-infixed-row">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, a.</p>
-                                        </div>
-                                        <div class="col-1"></div>
-                                    </div>
-                                    <div class="row border-row"></div>
-                                    <div class="row fix-for-row" style="padding-top:10px;">
-                                        <div class="col-12" style="padding-left: 10px;">
-                                            <form action="" style="width:100%;"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!"> <input type="submit" value="+" class="submit-x col-1" style="font-size:20px;"></form>
+                                            <form method="post"><input class="xD col-10" style="padding-left: 12px;" type="text" placeholder="Something new!" name="textTosend4" id="textTosend4"> <input type="submit" value="+" class="submit-x col-1 submit-x4" style="font-size:20px;"></form>
                                         </div>
 
                                     </div>

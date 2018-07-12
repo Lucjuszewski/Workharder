@@ -1,4 +1,7 @@
-<?php 
+<?php
+if(isset($_SESSION['isLoged'])) {
+    header('Location:'. site_url(). 'workharder/home');
+}
 if(isset($u_correct)) {if($u_correct==true) {$u = true;} elseif($u_correct==false) {$u = false;}}
 if(isset($p_correct)) {if($p_correct==true) {$p = true;} elseif($p_correct==false) {$p = false;}}
 if(isset($p2_correct)) {if($p2_correct==true) {$p2 = true;} elseif($p2_correct==false) {$p2 = false;}}
@@ -6,6 +9,14 @@ if(isset($e_correct)) {if($e_correct==true) {$e = true;} elseif($e_correct==fals
 if(isset($recaptcha_correct)) {if($recaptcha_correct==true) {$rc = true;} elseif($recaptcha_correct==false) {$rc = false;}}
 if($isRegister) {
     header('Location:'. site_url(). 'workharder/youAreWelcome');
+}
+if($access==true) { 
+header('Location:'. site_url(). 'workharder/home');
+$_SESSION['username'] = $usernameTologin;
+$_SESSION['isLoged'] = true;
+                  
+                  } elseif($access=false) {
+
 }
 ?>
 <!DOCTYPE html>
