@@ -9,6 +9,7 @@ class Workharder extends CI_Controller {
                 $this->load->helper('security');
                 $this->load->helper('date');
                 $this->load->model('workharder_m');
+        $this->load->library('session');
         }
     public function index() {
         $table = $this->input->post();
@@ -140,7 +141,39 @@ class Workharder extends CI_Controller {
         @$this->load->view('workharder_register',$data);
     }
     public function home(){
-        @$this->load->view('home');
+        $table = $this->input->post();
+        $username = $this->session->userdata('username');
+        $query = $this->workharder_m->LoadFromDB('username',$username,'records');
+        $array1 = array();
+        $array2 = array();
+        $array3 = array();
+        $array4 = array();
+        foreach ($query->result() as $row)
+{
+        switch ($row->submitnum) {
+                case 1:
+       $var = $row->todo;
+        $array1[] = $var;
+        break;
+                case 2:
+         $var = $row->todo;
+        $array2[] = $var;
+        break;
+                case 3:
+         $var = $row->todo;
+        $array3[] = $var;
+        break;
+                case 4:
+         $var = $row->todo;
+        $array4[] = $var;
+        break;
+}
+}
+        $data['array1'] = $array1;
+        $data['array2'] = $array2;
+        $data['array3'] = $array3;
+        $data['array4'] = $array4;
+        @$this->load->view('home',$data);
     }
 
 public function user_data_submit() {
@@ -148,14 +181,12 @@ $table = $this->input->post();
 if(isset($table['textTosend'])) {   //jeśli ajax został użyty
 $textTosend = $table['textTosend'];
 $username = $table['username'];
+$submitNum = $table['submitNum'];
 $now = time();
 $date = unix_to_human($now, TRUE, 'eu');
-$what = array('username' => $username,'todo' => $textTosend,'date' => $date);
+$what = array('username' => $username,'todo' => $textTosend,'date' => $date,'submitnum' =>$submitNum);
 if($this->workharder_m->SaveDB($what)) {
-    echo 'Udalosie'.$textTosend.$username.$date; }
-    else {
-        echo 'Nie Udalosie'.$textTosend;
-    }
+    echo $textTosend; }
 }
 }
 }

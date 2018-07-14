@@ -68,5 +68,8 @@ Class Workharder_m extends CI_Model {
             return false;
         }
     }
+    public function generateToDo() {
+        $this->load->database();
+    }
 }
 ?>
