@@ -145,34 +145,50 @@ class Workharder extends CI_Controller {
         $username = $this->session->userdata('username');
         $query = $this->workharder_m->LoadFromDB('username',$username,'records');
         $array1 = array();
+        $array1id = array();
         $array2 = array();
+        $array2id = array();
         $array3 = array();
+        $array3id = array();
         $array4 = array();
+        $array4id = array();
         foreach ($query->result() as $row)
 {
         switch ($row->submitnum) {
                 case 1:
        $var = $row->todo;
+       $var1 = $row->id;
         $array1[] = $var;
+        $array1id[] = $var1;
         break;
                 case 2:
          $var = $row->todo;
+         $var2 = $row->id;
         $array2[] = $var;
+        $array2id[] = $var;
         break;
                 case 3:
          $var = $row->todo;
+         $var3 = $row->id;
         $array3[] = $var;
+        $array3id[] = $var;
         break;
                 case 4:
          $var = $row->todo;
+         $var4 = $row->id;
         $array4[] = $var;
+        $array4id[] = $var;
         break;
 }
 }
         $data['array1'] = $array1;
+        $data['array1id'] = $array1id;
         $data['array2'] = $array2;
+        $data['array2id'] = $array2id;
         $data['array3'] = $array3;
+        $data['array3id'] = $array3id;
         $data['array4'] = $array4;
+        $data['array4id'] = $array4id;
         @$this->load->view('home',$data);
     }
 
@@ -188,5 +204,10 @@ $what = array('username' => $username,'todo' => $textTosend,'date' => $date,'sub
 if($this->workharder_m->SaveDB($what)) {
     echo $textTosend; }
 }
+    if(isset($table['id'])) {
+        $id = $table['id'];
+        $zapytanie = "DELETE FROM records WHERE id=" . $id;
+        $result = $this->workharder_m->queryTo($zapytanie);
+    }
 }
 }

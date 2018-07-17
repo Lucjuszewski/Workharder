@@ -43,12 +43,12 @@ $_SESSION['isLoged'] = true;
 <script>
     $(function(){
     $('.btn-login').on('click',function() {
-        $( ".dark-layer" ).show( 400, function() {
+        $( ".dark-layer" ).fadeIn( 400, function() {
     // Animation complete.
         });
     });
         $('.hyperlink').on('click',function() {
-               $( ".dark-layer" ).hide( 400, function() {
+               $( ".dark-layer" ).fadeOut( 400, function() {
     // Animation complete.
         });                          
         });
@@ -66,7 +66,7 @@ $_SESSION['isLoged'] = true;
         <div class="bordersquare x row" style="width:700px;">
         <div class="login-window col-5" style="border-right-style: dotted;  padding-right:35px; float:left;">
         <form action="http://[::1]/codeigniter/workharder/register" method="post" accept-charset="utf-8" style="width:100%;">
-        <div class="full-width d-flex justify-content-center align-items-center" style="width:100%; margin-bottom:10px;"><a href="<?php echo site_url(); ?>workharder/"><img src="https://www.smartads.in/resources/assets/images/logo/smartadslogo.png" alt=""></a></div>
+        <div class="full-width d-flex justify-content-center align-items-center" style="width:100%; margin-bottom:10px;"><a href="<?php echo site_url(); ?>workharder/"><img src="https://i.imgur.com/Y9C7wR7.png" alt="" class="logo"></a></div>
         <div class="form-group">
 
                 <input type="text" class="form-control" name="loginUsername" placeholder="Nazwa użytkownika albo adres email" required>
@@ -82,7 +82,7 @@ $_SESSION['isLoged'] = true;
         </div> <!--   Okno logowania KONIEC    --> </div>
     </div>
       <div class="row navbar" style="margin:0">
-        <div class="col-2" ><a href="<?php echo site_url(); ?>workharder/"><img src="https://www.smartads.in/resources/assets/images/logo/smartadslogo.png" alt=""></a></div>
+        <div class="col-2" ><a href="<?php echo site_url(); ?>workharder/"><img alt="" src="https://i.imgur.com/Y9C7wR7.png" alt="" class="logo"></a></div>
         
           <div class="col-1"></div>
              <div class="col-7"><nav class="nav">

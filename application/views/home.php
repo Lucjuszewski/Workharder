@@ -4,6 +4,7 @@ if(!isset($_SESSION['isLoged'])) {
 header('Location:'. site_url(). 'workharder/');
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en" style="height:100%; width:100%;">
@@ -15,6 +16,7 @@ header('Location:'. site_url(). 'workharder/');
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>css/stylesheet.css">
     <link rel="stylesheet" href="<?php echo base_url();?>css/fontello.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <style>
         .x {
             background: url("<?php echo base_url();?>images/footer_lodyas.png");
@@ -101,6 +103,11 @@ header('Location:'. site_url(). 'workharder/');
             word-wrap: break-word;
 
         }
+        .mark-as {
+            cursor: pointer;
+            opacity: 0.5;
+            
+        }
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -111,8 +118,24 @@ header('Location:'. site_url(). 'workharder/');
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>scripts/js-corner.js"></script>
     <script>
+        
         var test = "cokolwiek";
         $(document).ready(function() {
+            $(".mark-as").mouseenter(function() {
+                $(this).animate({
+    color:"red",
+    opacity: "1"
+  }, 300, function() {
+    // Animation complete.
+  });
+            });$(".mark-as").mouseout(function() {
+                $(this).animate({
+    color:"red",
+    opacity: "0.5"
+  }, 300, function() {
+    // Animation complete.
+  });
+            });
             // Get the input field
             var input = document.getElementById("textTosend");
             var input2 = document.getElementById("textTosend2");
@@ -160,6 +183,36 @@ header('Location:'. site_url(). 'workharder/');
             $(".card-in").corner("3px");
             var username = "<?php echo $_SESSION['username'];?>";
             //AJAX
+            
+            $(".mark-as").click(function(event) {
+                var id = $(this).attr("id");
+                var text = "p#" + id;
+                var value = $( text).text();
+                
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('workharder/user_data_submit'); ?>",
+                    data: {
+                        id: id
+                    },
+                    success: function(result) {
+                     
+                        
+                        //$(text).css("text-decoration", "line-through");
+                        $(text).closest(".card-in").fadeOut( "fast", function() {
+    // Animation complete.
+  });
+                        //$(text).closest(".card-in").css("display", "none");
+                        //animacja
+                        
+                    },
+                    error: function(request, error) {
+                        console.log(arguments);
+                        alert(" Can't do because: " + error);
+                    },
+
+                });
+            });
             $(".submit-x1").click(function(event) {
                 var textTosend = $("#textTosend").val();
                 var submitNum = 1;
@@ -259,12 +312,12 @@ header('Location:'. site_url(). 'workharder/');
         <!--  Początek containera -->
         <div class="row navbar">
             <!-- TOP -->
-            <div class="col-2"><a href="<?php echo site_url(); ?>workharder/"><img src="https://www.smartads.in/resources/assets/images/logo/smartadslogo.png" alt=""></a></div>
+            <div class="col-2"><a href="<?php echo site_url(); ?>workharder/"><img src="https://i.imgur.com/Y9C7wR7.png" alt="" class="logo" style="padding-left:0px;"></a></div>
 
             <div class="col-8">
                 <ul class="nav  nav-justified" role="tablist">
 
-                    <li class="active smbggr"><a href="#1kartajust" role="tab" data-toggle="tab">Zadania</a></li>
+                    <li class="active smbggr" style="height:100%;"><a href="#1kartajust" role="tab" data-toggle="tab">Zadania</a></li>
 
                     <li class="smbggr"><a href="#2kartajust" role="tab" data-toggle="tab">Dziennik</a></li>
 
@@ -298,7 +351,16 @@ header('Location:'. site_url(). 'workharder/');
                                         <div class="col-2"></div>
                                     </div>
                                     <div id="todo1">
-                                        
+                                        <div class="row fix-for-row card-in" style="border-radius: 3px;">
+                                        <div class="col-10 xyzyx">
+                                            <p class="text-infixed-row2">
+                                                
+                                                Zacząć żyć</p>
+                                        </div>
+                                    
+                                            <div class="col-2" style="padding-left:0px;"><div class="row" style="height:100%;"><div class="col-3" style="padding:0px;"><i class="fas fa-ellipsis-v d-flex align-items-center check" style=" color:#6D6D6D; font-size:17px; height:100%;margin-left:10px;"></i></div><div class="col-9"><a href="#" class="fas fa-check-square d-flex align-items-center" style=" color:#6D6D6D; font-size:25px; height:100%;"></a></div></div>
+                                    </div>
+                                    </div>
                                         <!--GENEROWANIE-->
 
                                         <?php
@@ -308,13 +370,14 @@ header('Location:'. site_url(). 'workharder/');
                                         for($i=0; $i<=$max; $i++) {
                                             echo 
                                             '<div class="row fix-for-row card-in">
-                                        <div class="col-11 xyzyx">
-                                            <p class="text-infixed-row">
+                                        <div class="col-10 xyzyx">
+                                            <p class="text-infixed-row" id="'.$array1id[$i].'">
                                                 
                                                 '.$array1[$i].'</p>
                                         </div>
                                     
-                                        <div class="col-1"></div>
+                                       <div class="col-2" style="padding-left:0px;"><div class="row" style="height:100%;"><div class="col-3" style="padding:0px;"><i class="fas fa-ellipsis-v d-flex align-items-center check" style=" color:#6D6D6D; font-size:17px; height:100%;margin-left:10px;"></i></div><div class="col-9"><i class="fas fa-check-square d-flex align-items-center mark-as" style=" color:#6D6D6D; font-size:25px; height:100%;" id="'.$array1id[$i].'"></i></div></div>
+                                    </div>
                                     </div>';
                                             
                                         }
@@ -353,13 +416,13 @@ header('Location:'. site_url(). 'workharder/');
                                         for($i=0; $i<=$max; $i++) {
                                             echo 
                                             '<div class="row fix-for-row card-in">
-                                        <div class="col-11 xyzyx">
+                                        <div class="col-10 xyzyx">
                                             <p class="text-infixed-row">
                                                 
                                                 '.$array2[$i].'</p>
                                         </div>
                                     
-                                        <div class="col-1"></div>
+                                        <div class="col-2"></div>
                                     </div>';
                                             
                                         }
@@ -399,13 +462,13 @@ header('Location:'. site_url(). 'workharder/');
                                         for($i=0; $i<=$max; $i++) {
                                             echo 
                                             '<div class="row fix-for-row card-in">
-                                        <div class="col-11 xyzyx">
+                                        <div class="col-10 xyzyx">
                                             <p class="text-infixed-row">
                                                 
                                                 '.$array3[$i].'</p>
                                         </div>
                                     
-                                        <div class="col-1"></div>
+                                        <div class="col-2"></div>
                                     </div>';
                                             
                                         }
@@ -443,13 +506,13 @@ header('Location:'. site_url(). 'workharder/');
                                         for($i=0; $i<=$max; $i++) {
                                             echo 
                                             '<div class="row fix-for-row card-in">
-                                        <div class="col-11 xyzyx">
+                                        <div class="col-10 xyzyx">
                                             <p class="text-infixed-row">
                                                 
                                                 '.$array4[$i].'</p>
                                         </div>
                                     
-                                        <div class="col-1"></div>
+                                        <div class="col-2"></div>
                                     </div>';
                                             
                                         }

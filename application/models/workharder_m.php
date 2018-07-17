@@ -68,8 +68,10 @@ Class Workharder_m extends CI_Model {
             return false;
         }
     }
-    public function generateToDo() {
+    public function queryTo($query) {
         $this->load->database();
+        $result = $this->db->query($query);
+        return $result;
     }
 }
 ?>
