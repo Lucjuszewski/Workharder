@@ -209,5 +209,17 @@ if($this->workharder_m->SaveDB($what)) {
         $zapytanie = "DELETE FROM records WHERE id=" . $id;
         $result = $this->workharder_m->queryTo($zapytanie);
     }
+    if(isset($table['idDelete'])) {
+        $id = $table['idDelete'];
+        $zapytanie = "DELETE FROM records WHERE id=" . $id;
+        $result = $this->workharder_m->queryTo($zapytanie);
+    }
+    if(isset($table['newText'])) { 
+        $newText = $table['newText'];
+        $id2 = $table['idText'];
+        $zapytanie = 'UPDATE records SET todo="'.$newText.'" WHERE id='.$id2;
+        $result = $this->workharder_m->queryTo($zapytanie); //jebany syntax..
+        
+    }
 }
 }
